@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="warn">
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="%-6r %d{ISO8601} %clr{%-5p} %clr{[%t]}{blue} %clr{%X{correlationId}}{yellow} %clr{%c{1.}}{magenta} - %m%n"/>
+        </Console>
+        <Async name="AsyncAppender">
+            <AppenderRef ref="ConsoleAppender"/>
+        </Async>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="AsyncAppender"/>
+        </Root>
+        <Logger name="br.com.aqueteron" level="debug">
+        </Logger>
+    </Loggers>
+</configuration>

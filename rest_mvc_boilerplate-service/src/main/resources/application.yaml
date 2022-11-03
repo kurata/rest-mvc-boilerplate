@@ -1,0 +1,45 @@
+
+# INFO ENDPOINT CONFIGURATION
+#info.app:
+#  name: @project.name@
+#  description: @project.description@
+#  version: @project.version@
+#  encoding: @project.build.sourceEncoding@
+#  java.version: @java.version@
+
+jasypt:
+  encryptor:
+    password: quxUbHstJFyLThLzgY9xg2XUaQRMMhX2
+
+# Actuator endpoints
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env,flyway,info
+  endpoint:
+    health:
+      show-details: always
+
+spring:
+  flyway:
+    schemas: rest_mvc_boilerplate
+  jpa:
+    #    database-plataform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        default_schema: rest_mvc_boilerplate
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+        format_sql: false
+        temp.use_jdbc_metadata_defaults: false
+        jdbc.time_zone: UTC
+    show-sql: false
+  profiles:
+    active: ${profiles_active:local}
+  messages:
+    basename: messages/messages
+  output:
+    ansi:
+      enabled: always
