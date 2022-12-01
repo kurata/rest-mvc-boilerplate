@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.support.WebExchangeBindException;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
@@ -51,6 +52,11 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
                 throwable
         );
         serverWebExchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (throwable instanceof ResponseStatusException) {
+            ResponseStatusException responseStatusException = (ResponseStatusException) throwable;
+            errorResponse = new ErrorResponse(null, null, responseStatusException.getMessage(), null, responseStatusException);
+            serverWebExchange.getResponse().setStatusCode(responseStatusException.getStatus());
+        }
         if (throwable instanceof HttpBusinessException) {
             HttpBusinessException httpBusinessException = (HttpBusinessException) throwable;
             errorResponse = new ErrorResponse(
@@ -90,7 +96,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
         String message;
         try {
             String defaultMessage = fieldError.getDefaultMessage();
-            if( defaultMessage != null) {
+            if (defaultMessage != null) {
                 message = this.messageSource.getMessage(
                         defaultMessage,
                         List.of(fieldError.getField()).toArray(),

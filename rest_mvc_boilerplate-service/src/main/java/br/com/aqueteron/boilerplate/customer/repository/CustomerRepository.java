@@ -1,6 +1,6 @@
-package br.com.aqueteron.boilerplate.repository;
+package br.com.aqueteron.boilerplate.customer.repository;
 
-import br.com.aqueteron.boilerplate.domain.Customer;
+import br.com.aqueteron.boilerplate.customer.domain.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;

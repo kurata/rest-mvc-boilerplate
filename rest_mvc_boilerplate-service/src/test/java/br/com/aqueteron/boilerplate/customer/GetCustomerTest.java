@@ -16,19 +16,19 @@ class GetCustomerTest extends AbstractApplicationTestStart {
         LocalDate birthday = LocalDate.parse("2002-05-15", DateTimeFormatter.ISO_DATE);
         webTestClient()
                 .get()
-                .uri("/api/cliente/1")
+                .uri("/api/customers/1")
                 .exchange()
                 .expectStatus()
                 .isOk()
                 .expectBody()
-                .json("{\"id\":1,\"nome\":\"Marcela Cláudia Maitê Duarte\",\"dataNascimento\":\"2002-05-15\",\"idade\":"+ Period.between(birthday, LocalDate.now()).getYears() + "}");
+                .json("{\"id\":1,\"nome\":\"Marcela Cláudia Maitê Duarte\",\"dataNascimento\":\"2002-05-15\",\"idade\":" + Period.between(birthday, LocalDate.now()).getYears() + "}");
     }
 
     @Test
     void shouldGetCustomerNotFoundTest() {
         webTestClient()
                 .get()
-                .uri("/api/cliente/1")
+                .uri("/api/customers/1")
                 .exchange()
                 .expectStatus()
                 .isNotFound();

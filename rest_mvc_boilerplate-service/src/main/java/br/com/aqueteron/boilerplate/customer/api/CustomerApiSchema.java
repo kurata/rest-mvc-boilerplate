@@ -1,4 +1,4 @@
-package br.com.aqueteron.boilerplate.api;
+package br.com.aqueteron.boilerplate.customer.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

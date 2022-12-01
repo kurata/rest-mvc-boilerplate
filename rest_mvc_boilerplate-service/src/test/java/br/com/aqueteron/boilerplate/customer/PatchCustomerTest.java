@@ -1,7 +1,7 @@
 package br.com.aqueteron.boilerplate.customer;
 
 import br.com.aqueteron.boilerplate.utils.AbstractApplicationTestStart;
-import br.com.aqueteron.boilerplate.api.CustomerApiSchema;
+import br.com.aqueteron.boilerplate.customer.api.CustomerApiSchema;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -17,7 +17,7 @@ class PatchCustomerTest extends AbstractApplicationTestStart {
         LocalDate birthday = LocalDate.parse("2002-05-15", DateTimeFormatter.ISO_DATE);
         webTestClient()
                 .patch()
-                .uri("/api/cliente/1")
+                .uri("/api/customers/1")
                 .bodyValue(new CustomerApiSchema(1l, "Nome completo", null))
                 .exchange()
                 .expectStatus()
@@ -32,7 +32,7 @@ class PatchCustomerTest extends AbstractApplicationTestStart {
         LocalDate birthday = LocalDate.parse("2002-05-15", DateTimeFormatter.ISO_DATE);
         webTestClient()
                 .patch()
-                .uri("/api/cliente/1")
+                .uri("/api/customers/1")
                 .bodyValue(new CustomerApiSchema(1l, "Nome completo", null))
                 .exchange()
                 .expectStatus()
@@ -47,7 +47,7 @@ class PatchCustomerTest extends AbstractApplicationTestStart {
 
         webTestClient()
                 .patch()
-                .uri("/api/cliente/1")
+                .uri("/api/customers/1")
                 .bodyValue(new CustomerApiSchema(1l, null, thirtyYearsAgo))
                 .exchange()
                 .expectStatus()
@@ -62,7 +62,7 @@ class PatchCustomerTest extends AbstractApplicationTestStart {
 
         webTestClient()
                 .patch()
-                .uri("/api/cliente/1")
+                .uri("/api/customers/1")
                 .bodyValue(new CustomerApiSchema(1l, null, thirtyYearsAgo))
                 .exchange()
                 .expectStatus()

@@ -11,7 +11,7 @@ class DeleteCustomerTest extends AbstractApplicationTestStart {
     void shouldDeleteCustomerTest() {
         webTestClient()
                 .delete()
-                .uri("/api/cliente/1")
+                .uri("/api/customers/1")
                 .exchange()
                 .expectStatus()
                 .isOk();
@@ -21,7 +21,7 @@ class DeleteCustomerTest extends AbstractApplicationTestStart {
     void shouldDeleteCustomerNotFoundTest() {
         webTestClient()
                 .delete()
-                .uri("/api/cliente/1")
+                .uri("/api/customers/1")
                 .exchange()
                 .expectStatus()
                 .isNotFound();

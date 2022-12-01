@@ -1,4 +1,4 @@
-package br.com.aqueteron.boilerplate.api;
+package br.com.aqueteron.boilerplate.customer.api;
 
 import br.com.aqueteron.boilerplate.components.utilities.PagingRequest;
 import lombok.Data;

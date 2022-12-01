@@ -1,4 +1,4 @@
-package br.com.aqueteron.boilerplate.domain;
+package br.com.aqueteron.boilerplate.customer.domain;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,13 @@ public class Customer implements Serializable {
     private LocalDate birthDate;
 
     public Customer() {
-        this(null);
+        this((Long) null);
+    }
+
+    public Customer(final Customer originalCustomer) {
+        this(originalCustomer.getId());
+        this.fullName = originalCustomer.getFullName();
+        this.birthDate = originalCustomer.getBirthDate();
     }
 
 }

@@ -1,7 +1,7 @@
 package br.com.aqueteron.boilerplate.customer;
 
 import br.com.aqueteron.boilerplate.utils.AbstractApplicationTestStart;
-import br.com.aqueteron.boilerplate.api.CustomerApiSchema;
+import br.com.aqueteron.boilerplate.customer.api.CustomerApiSchema;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.jdbc.Sql;
 
@@ -12,11 +12,11 @@ class PutCustomerTest extends AbstractApplicationTestStart {
 
     @Test
     @Sql("/db/base_customers.sql")
-    void shouldPustCustomerTest() {
+    void shouldPutCustomerTest() {
         LocalDate thirtyYearsAgo = LocalDate.now().minusYears(30l);
         webTestClient()
                 .put()
-                .uri("/api/cliente/1")
+                .uri("/api/customers/1")
                 .bodyValue(new CustomerApiSchema(1l, "Nome completo", thirtyYearsAgo))
                 .exchange()
                 .expectStatus()
@@ -26,11 +26,11 @@ class PutCustomerTest extends AbstractApplicationTestStart {
     }
 
     @Test
-    void shouldPustCustomerNotFoundTest() {
+    void shouldPutCustomerNotFoundTest() {
         LocalDate thirtyYearsAgo = LocalDate.now().minusYears(30l);
         webTestClient()
                 .put()
-                .uri("/api/cliente/1")
+                .uri("/api/customers/1")
                 .bodyValue(new CustomerApiSchema(1l, "Nome completo", thirtyYearsAgo))
                 .exchange()
                 .expectStatus()

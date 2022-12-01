@@ -1,7 +1,7 @@
 package br.com.aqueteron.boilerplate.customer;
 
 import br.com.aqueteron.boilerplate.utils.AbstractApplicationTestStart;
-import br.com.aqueteron.boilerplate.api.CustomerApiSchema;
+import br.com.aqueteron.boilerplate.customer.api.CustomerApiSchema;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ class PostCustomerTest extends AbstractApplicationTestStart {
         LocalDate thirtyYearsAgo = LocalDate.now().minusYears(30l);
         webTestClient()
                 .post()
-                .uri("/api/cliente")
+                .uri("/api/customers")
                 .bodyValue(new CustomerApiSchema(null, "Nome completo", thirtyYearsAgo))
                 .exchange()
                 .expectStatus()

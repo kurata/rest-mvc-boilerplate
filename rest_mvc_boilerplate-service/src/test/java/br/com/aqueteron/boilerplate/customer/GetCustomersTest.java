@@ -10,7 +10,7 @@ class GetCustomersTest extends AbstractApplicationTestStart {
     void shouldGetCustomerWithEmptyResultTest() {
         webTestClient()
                 .get()
-                .uri("/api/cliente")
+                .uri("/api/customers")
                 .exchange()
                 .expectStatus()
                 .isOk()
@@ -23,7 +23,7 @@ class GetCustomersTest extends AbstractApplicationTestStart {
     void shouldGetCustomerTest() {
         webTestClient()
                 .get()
-                .uri("/api/cliente")
+                .uri("/api/customers")
                 .exchange()
                 .expectStatus()
                 .isOk();

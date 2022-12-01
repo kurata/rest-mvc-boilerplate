@@ -1,9 +1,9 @@
-package br.com.aqueteron.boilerplate.controller;
+package br.com.aqueteron.boilerplate.customer.controller;
 
-import br.com.aqueteron.boilerplate.api.CustomerApiSchema;
-import br.com.aqueteron.boilerplate.api.CustomerResource;
-import br.com.aqueteron.boilerplate.api.GetCustomerRequest;
-import br.com.aqueteron.boilerplate.service.CustomerService;
+import br.com.aqueteron.boilerplate.customer.api.CustomerApiSchema;
+import br.com.aqueteron.boilerplate.customer.api.CustomerResource;
+import br.com.aqueteron.boilerplate.customer.api.GetCustomerRequest;
+import br.com.aqueteron.boilerplate.customer.service.CustomerService;
 import br.com.aqueteron.boilerplate.components.utilities.PageResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,31 +25,31 @@ public class CustomerController implements CustomerResource {
 
     @Override
     public Mono<PageResult<CustomerApiSchema>> getCustomers(final GetCustomerRequest getCustomerRequest) {
-        return this.service.getClients(getCustomerRequest).map(CustomerHelper::toClientApiSchemaPage);
+        return this.service.getByRequest(getCustomerRequest);
     }
 
     @Override
     public Mono<CustomerApiSchema> postCustomer(final CustomerApiSchema postClientRequest) {
-        return this.service.postClient(postClientRequest).map(CustomerHelper::toClientApiSchema);
+        return this.service.post(postClientRequest);
     }
 
     @Override
     public Mono<CustomerApiSchema> getCustomer(final Long key) {
-        return this.service.getClient(key).map(CustomerHelper::toClientApiSchema);
+        return this.service.getUnique(key);
     }
 
     @Override
     public Mono<CustomerApiSchema> putCustomer(final Long key, final CustomerApiSchema customerApiSchema) {
-        return this.service.putClient(key, customerApiSchema).map(CustomerHelper::toClientApiSchema);
+        return this.service.put(key, customerApiSchema);
     }
 
     @Override
     public Mono<CustomerApiSchema> patchCustomer(final Long key, final CustomerApiSchema customerApiSchema) {
-        return this.service.patchClient(key, customerApiSchema).map(CustomerHelper::toClientApiSchema);
+        return this.service.patch(key, customerApiSchema);
     }
 
     @Override
     public Mono<Void> deleteCustomer(final Long key) {
-        return this.service.deleteClient(key);
+        return this.service.delete(key);
     }
 }

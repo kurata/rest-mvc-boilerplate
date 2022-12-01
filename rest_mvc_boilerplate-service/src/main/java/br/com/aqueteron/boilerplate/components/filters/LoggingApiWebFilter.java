@@ -12,14 +12,18 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
-public class LoggingWebFilter implements WebFilter {
+public class LoggingApiWebFilter implements WebFilter {
+
+    private static final String API_URI_PATH = "/api/";
 
     @Override
     public Mono<Void> filter(final ServerWebExchange serverWebExchange, final WebFilterChain webFilterChain) {
         BodyCaptureExchange bodyCaptureExchange = new BodyCaptureExchange(serverWebExchange);
         return webFilterChain.filter(bodyCaptureExchange).doFinally(se -> {
-            logRequest(serverWebExchange.getRequest(), bodyCaptureExchange.getRequestBody());
-            logResponse(serverWebExchange.getRequest(), serverWebExchange.getResponse(), bodyCaptureExchange.getResponseBody());
+            if (serverWebExchange.getRequest().getPath().toString().startsWith(API_URI_PATH)) {
+                logRequest(serverWebExchange.getRequest(), bodyCaptureExchange.getRequestBody());
+                logResponse(serverWebExchange.getRequest(), serverWebExchange.getResponse(), bodyCaptureExchange.getResponseBody());
+            }
         });
     }
 
