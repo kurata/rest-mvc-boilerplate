@@ -21,7 +21,7 @@ create_user()
 	fi
 }
 
-docker-compose --project-name $PROJECT_NAME -f ./docker/docker-compose-dev.yml up -d
+docker-compose --project-name $PROJECT_NAME -f ./docker/docker-compose-stand-alone.yml up -d
 echo "docker instance up ..."
 sleep 20 # time up docker
 create_user

@@ -1,433 +1,250 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-      
-  <modelVersion>4.0.0</modelVersion>
-      
-  <groupId>br.com.aqueteron</groupId>
-      
-  <artifactId>rest_mvc_boilerplate</artifactId>
-      
-  <packaging>pom</packaging>
-      
-  <version>0.0.1-SNAPSHOT</version>
-      
-  <name>rest_mvc_boilerplate - Project</name>
-      
-  <properties>
-            
-    <java.version>11</java.version>
-            
-    <encoding>UTF-8</encoding>
-            
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-            
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-            
-    <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
-            
-    <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
-            
-    <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSX</maven.build.timestamp.format>
-            
-    <skip.unit.test>false</skip.unit.test>
-            
-    <skip.integration.test>true</skip.integration.test>
-            
-    <spring-boot.version>2.7.2</spring-boot.version>
-            
-    <spring-security-oauth2.version>2.6.8</spring-security-oauth2.version>
-            
-    <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
-            
-    <log4j.version>2.18.0</log4j.version>
-            
-    <lombok.version>1.18.24</lombok.version>
-            
-    <postgresql.version>42.4.1</postgresql.version>
-            
-    <springfox.version>3.0.0</springfox.version>
-            
-    <junit-jupiter.version>5.9.0</junit-jupiter.version>
-            
-    <testcontainers.version>1.17.3</testcontainers.version>
-            
-    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-            
-    <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
-            
-    <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
-            
-    <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
-            
-    <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
-        
-  </properties>
-      
-  <dependencyManagement>
-            
-    <dependencies>
-                  
-      <dependency>
-                        
-        <!-- Import dependency management from Spring Boot -->
-                        
-        <groupId>org.springframework.boot</groupId>
-                        
-        <artifactId>spring-boot-dependencies</artifactId>
-                        
-        <version>${spring-boot.version}</version>
-                        
-        <type>pom</type>
-                        
-        <scope>import</scope>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.springframework.security.oauth.boot</groupId>
-                        
-        <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-                        
-        <version>${spring-security-oauth2.version}</version>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.springframework.security</groupId>
-                        
-        <artifactId>spring-security-jwt</artifactId>
-                        
-        <version>${spring-security-jwt.version}</version>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.apache.logging.log4j</groupId>
-                        
-        <artifactId>log4j-slf4j-impl</artifactId>
-                        
-        <version>${log4j.version}</version>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.apache.logging.log4j</groupId>
-                        
-        <artifactId>log4j-api</artifactId>
-                        
-        <version>${log4j.version}</version>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.apache.logging.log4j</groupId>
-                        
-        <artifactId>log4j-core</artifactId>
-                        
-        <version>${log4j.version}</version>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.apache.logging.log4j</groupId>
-                        
-        <artifactId>log4j-jul</artifactId>
-                        
-        <version>${log4j.version}</version>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.projectlombok</groupId>
-                        
-        <artifactId>lombok</artifactId>
-                        
-        <version>${lombok.version}</version>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.postgresql</groupId>
-                        
-        <artifactId>postgresql</artifactId>
-                        
-        <version>${postgresql.version}</version>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>io.springfox</groupId>
-                        
-        <artifactId>springfox-boot-starter</artifactId>
-                        
-        <version>${springfox.version}</version>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>io.springfox</groupId>
-                        
-        <artifactId>springfox-oas</artifactId>
-                        
-        <version>${springfox.version}</version>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.junit.jupiter</groupId>
-                        
-        <artifactId>junit-jupiter</artifactId>
-                        
-        <version>${junit-jupiter.version}</version>
-                        
-        <scope>test</scope>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.testcontainers</groupId>
-                        
-        <artifactId>testcontainers</artifactId>
-                        
-        <version>${testcontainers.version}</version>
-                        
-        <scope>test</scope>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.testcontainers</groupId>
-                        
-        <artifactId>junit-jupiter</artifactId>
-                        
-        <version>${testcontainers.version}</version>
-                        
-        <scope>test</scope>
-                    
-      </dependency>
-                  
-      <dependency>
-                        
-        <groupId>org.testcontainers</groupId>
-                        
-        <artifactId>postgresql</artifactId>
-                        
-        <version>${testcontainers.version}</version>
-                        
-        <scope>test</scope>
-                    
-      </dependency>
-              
-    </dependencies>
-        
-  </dependencyManagement>
-      
-  <build>
-            
-    <pluginManagement>
-                  
-      <plugins>
-                        
-        <plugin>
-                              
-          <groupId>org.springframework.boot</groupId>
-                              
-          <artifactId>spring-boot-maven-plugin</artifactId>
-                              
-          <version>${spring-boot.version}</version>
-                          
-        </plugin>
-                        
-        <plugin>
-                              
-          <artifactId>maven-compiler-plugin</artifactId>
-                              
-          <version>${maven-compiler-plugin.version}</version>
-                              
-          <configuration>
-                                    
-            <source>${java.version}</source>
-                                    
-            <target>${java.version}</target>
-                                
-          </configuration>
-                          
-        </plugin>
-                        
-        <plugin>
-                              
-          <groupId>org.apache.maven.plugins</groupId>
-                              
-          <artifactId>maven-jar-plugin</artifactId>
-                              
-          <version>${maven-jar-plugin.version}</version>
-                              
-          <configuration>
-                                    
-            <archive>
-                                          
-              <manifest>
-                                                
-                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                                                
-                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                                            
-              </manifest>
-                                      
-            </archive>
-                                
-          </configuration>
-                          
-        </plugin>
-                        
-        <plugin>
-                              
-          <groupId>org.apache.maven.plugins</groupId>
-                              
-          <artifactId>maven-surefire-plugin</artifactId>
-                              
-          <version>${maven-surefire-plugin.version}</version>
-                              
-          <configuration>
-                                    
-            <skipTests>${skip.unit.test}</skipTests>
-                                    
-            <excludes>
-                                          
-              <exclude>**/*IntegrationTest.java</exclude>
-                                      
-            </excludes>
-                                
-          </configuration>
-                              
-          <executions>
-                                    
-            <execution>
-                                          
-              <id>integration-test</id>
-                                          
-              <goals>
-                                                
-                <goal>test</goal>
-                                            
-              </goals>
-                                          
-              <phase>integration-test</phase>
-                                          
-              <configuration>
-                                                
-                <skipTests>${skip.integration.test}</skipTests>
-                                                
-                <excludes>
-                                                      
-                  <exclude>none</exclude>
-                                                  
-                </excludes>
-                                                
-                <includes>
-                                                      
-                  <include>**/*IntegrationTest.java</include>
-                                                  
-                </includes>
-                                            
-              </configuration>
-                                      
-            </execution>
-                                
-          </executions>
-                          
-        </plugin>
-                        
-        <plugin>
-                              
-          <groupId>org.jacoco</groupId>
-                              
-          <artifactId>jacoco-maven-plugin</artifactId>
-                              
-          <version>${jacoco-maven-plugin.version}</version>
-                              
-          <executions>
-                                    
-            <execution>
-                                          
-              <id>pre-unit-test</id>
-                                          
-              <goals>
-                                                
-                <goal>prepare-agent</goal>
-                                            
-              </goals>
-                                      
-            </execution>
-                                    
-            <execution>
-                                          
-              <id>report</id>
-                                          
-              <phase>prepare-package</phase>
-                                          
-              <goals>
-                                                
-                <goal>report</goal>
-                                            
-              </goals>
-                                      
-            </execution>
-                                
-          </executions>
-                          
-        </plugin>
-                        
-        <plugin>
-                              
-          <groupId>com.spotify</groupId>
-                              
-          <artifactId>dockerfile-maven-plugin</artifactId>
-                              
-          <version>${dockerfile-maven-plugin.version}</version>
-                          
-        </plugin>
-                    
-      </plugins>
-              
-    </pluginManagement>
-        
-  </build>
-      
-  <profiles>
-            
-    <profile>
-                  
-      <id>integration-test</id>
-                  
-      <properties>
-                        
-        <skip.integration.test>false</skip.integration.test>
-                        
-        <skip.unit.test>true</skip.unit.test>
-                    
-      </properties>
-              
-    </profile>
-        
-  </profiles>
-  
-  <modules>
-      
-    <module>rest_mvc_boilerplate-service</module>
-      
-  </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>br.com.aqueteron</groupId>
+    <artifactId>rest_mvc_boilerplate</artifactId>
+    <packaging>pom</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>Rest MVC Boilerplate - Project</name>
+
+    <properties>
+        <java.version>11</java.version>
+        <encoding>UTF-8</encoding>
+
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+        <maven.build.timestamp.format>yyyy-MM-dd'T'HH:mm:ss.SSSX</maven.build.timestamp.format>
+
+        <skip.unit.test>false</skip.unit.test>
+        <skip.integration.test>true</skip.integration.test>
+
+        <spring-boot.version>2.7.2</spring-boot.version>
+        <spring-security-oauth2.version>2.6.8</spring-security-oauth2.version>
+        <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
+        <log4j.version>2.18.0</log4j.version>
+        <lombok.version>1.18.24</lombok.version>
+        <postgresql.version>42.4.1</postgresql.version>
+        <springfox.version>3.0.0</springfox.version>
+        <junit-jupiter.version>5.9.0</junit-jupiter.version>
+        <testcontainers.version>1.17.3</testcontainers.version>
+
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+        <maven-surefire-plugin.version>3.0.0-M7</maven-surefire-plugin.version>
+        <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
+        <dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security.oauth.boot</groupId>
+                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+                <version>${spring-security-oauth2.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${spring-security-jwt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-slf4j-impl</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-api</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jul</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-oas</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit-jupiter.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                </plugin>
+
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <skipTests>${skip.unit.test}</skipTests>
+                        <excludes>
+                            <exclude>**/*IntegrationTest.java</exclude>
+                        </excludes>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>integration-test</id>
+                            <goals>
+                                <goal>test</goal>
+                            </goals>
+                            <phase>integration-test</phase>
+                            <configuration>
+                                <skipTests>${skip.integration.test}</skipTests>
+                                <excludes>
+                                    <exclude>none</exclude>
+                                </excludes>
+                                <includes>
+                                    <include>**/*IntegrationTest.java</include>
+                                </includes>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.jacoco</groupId>
+                    <artifactId>jacoco-maven-plugin</artifactId>
+                    <version>${jacoco-maven-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>pre-unit-test</id>
+                            <goals>
+                                <goal>prepare-agent</goal>
+                            </goals>
+                        </execution>
+
+                        <execution>
+                            <id>report</id>
+                            <phase>prepare-package</phase>
+                            <goals>
+                                <goal>report</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>dockerfile-maven-plugin</artifactId>
+                    <version>${dockerfile-maven-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>integration-test</id>
+            <properties>
+                <skip.integration.test>false</skip.integration.test>
+                <skip.unit.test>true</skip.unit.test>
+            </properties>
+        </profile>
+    </profiles>
+
+    <modules>
+        <module>rest_mvc_boilerplate-service</module>
+    </modules>
 </project>
