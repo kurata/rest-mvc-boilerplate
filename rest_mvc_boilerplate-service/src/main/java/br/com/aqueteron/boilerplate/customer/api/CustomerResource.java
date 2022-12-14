@@ -5,7 +5,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -25,9 +24,8 @@ public interface CustomerResource {
     @ApiOperation(value = "Post new customer", nickname = "postCustomer", notes = "Create a new customer",
             response = CustomerApiSchema.class, tags = {"customers"})
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Success to create a new customer.", response = Void.class)})
+            @ApiResponse(code = 201, message = "Success to create a new customer.", response = CustomerApiSchema.class)})
     @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<CustomerApiSchema> postCustomer(@RequestBody CustomerApiSchema postClientRequest);
 
     @ApiOperation(value = "Get customer", nickname = "getCustomer", notes = "Retrieve a customer", response = CustomerApiSchema.class, tags = {"customers"})
