@@ -19,16 +19,22 @@ import java.util.*;
 @Slf4j
 public class LoggingApiWebFilter extends OncePerRequestFilter {
 
+    private static final String API_URI_PATH = "/api/";
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
-        ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
-        chain.doFilter(requestWrapper, responseWrapper);
-        byte[] requestBody = requestWrapper.getContentAsByteArray();
-        byte[] responseBody = responseWrapper.getContentAsByteArray();
-        logRequest(requestWrapper, new String(requestBody, StandardCharsets.UTF_8));
-        logResponse(requestWrapper, responseWrapper, new String(responseBody, StandardCharsets.UTF_8));
-        responseWrapper.copyBodyToResponse();
+        if (request.getRequestURI().startsWith(API_URI_PATH)) {
+            ContentCachingRequestWrapper requestWrapper = new ContentCachingRequestWrapper(request);
+            ContentCachingResponseWrapper responseWrapper = new ContentCachingResponseWrapper(response);
+            chain.doFilter(requestWrapper, responseWrapper);
+            byte[] requestBody = requestWrapper.getContentAsByteArray();
+            byte[] responseBody = responseWrapper.getContentAsByteArray();
+            logRequest(requestWrapper, new String(requestBody, StandardCharsets.UTF_8));
+            logResponse(requestWrapper, responseWrapper, new String(responseBody, StandardCharsets.UTF_8));
+            responseWrapper.copyBodyToResponse();
+        } else {
+            chain.doFilter(request, response);
+        }
     }
 
     private void logRequest(final HttpServletRequest request, final String requestBody) throws IOException {
