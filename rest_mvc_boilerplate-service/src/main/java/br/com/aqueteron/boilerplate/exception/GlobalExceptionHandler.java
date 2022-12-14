@@ -1,18 +1,9 @@
 package br.com.aqueteron.boilerplate.exception;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.core.io.buffer.DataBufferFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,7 +11,6 @@ import org.springframework.web.bind.support.WebExchangeBindException;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.List;
@@ -36,12 +26,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     private static final String UNABLE_LOAD_FIELD_ERROR_MESSAGE = "Unable to load field error message with key {}, to field {}.";
 
-    private final ObjectMapper objectMapper;
-
     private final MessageSource messageSource;
 
-    public GlobalExceptionHandler(final ObjectMapper objectMapper, final MessageSource messageSource) {
-        this.objectMapper = objectMapper;
+    public GlobalExceptionHandler(final MessageSource messageSource) {
         this.messageSource = messageSource;
     }
 

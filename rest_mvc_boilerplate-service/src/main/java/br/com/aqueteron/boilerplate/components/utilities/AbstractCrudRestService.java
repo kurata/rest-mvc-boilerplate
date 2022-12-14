@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.Serializable;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 
 public abstract class AbstractCrudRestService<T extends Serializable, U extends Serializable, I extends Serializable> {
 
@@ -32,13 +31,6 @@ public abstract class AbstractCrudRestService<T extends Serializable, U extends 
         this.repository = repository;
         this.helper = helper;
     }
-
-//    public Flux<U> getAll() {
-//        return Flux.fromStream(
-//                StreamSupport.stream(this.repository.findAll().spliterator(), true)
-//                        .map(this.helper::toApiSchema)
-//        );
-//    }
 
     public ResponseEntity<U> post(final U newObjectSchema) {
         I objectKey = this.helper.extractId(newObjectSchema);

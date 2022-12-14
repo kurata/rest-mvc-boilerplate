@@ -42,10 +42,8 @@ public class CustomerHelper implements Helper<Customer, CustomerApiSchema, Long>
     @Override
     public Customer mergeDomainSchema(final Customer originalObject, final CustomerApiSchema newObjectSchema) {
         Customer customerToUpdate = new Customer(originalObject);
-        if (newObjectSchema.getFullName() != null) {
-            if (!newObjectSchema.getFullName().isEmpty()) {
-                customerToUpdate.setFullName(newObjectSchema.getFullName());
-            }
+        if (newObjectSchema.getFullName() != null && !newObjectSchema.getFullName().isEmpty()) {
+            customerToUpdate.setFullName(newObjectSchema.getFullName());
         }
         if (newObjectSchema.getBirthDate() != null) {
             customerToUpdate.setBirthDate(newObjectSchema.getBirthDate());

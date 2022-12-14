@@ -1,17 +1,18 @@
 package br.com.aqueteron.boilerplate.configuration;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.DefaultSecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class WebMvcSecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class WebMvcSecurityConfiguration {
 
-    @Override
-    public void configure(final WebSecurity web) throws Exception {
-        web.ignoring().anyRequest();
+    @Bean
+    public DefaultSecurityFilterChain webHttpSecurity(final HttpSecurity http) throws Exception {
+        return http.build();
     }
 
 }
