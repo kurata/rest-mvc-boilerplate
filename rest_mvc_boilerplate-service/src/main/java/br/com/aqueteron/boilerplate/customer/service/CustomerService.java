@@ -10,8 +10,8 @@ import br.com.aqueteron.boilerplate.customer.repository.CustomerRepository;
 import br.com.aqueteron.boilerplate.exception.BusinessExceptionFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
@@ -28,8 +28,7 @@ public class CustomerService extends AbstractCrudRestService<Customer, CustomerA
         this.helper = helper;
     }
 
-    public Mono<PageResult<CustomerApiSchema>> getByRequest(final GetCustomerRequest getCustomerRequest) {
-        return Mono.just(helper.toClientApiSchemaPage(this.repository.search(getCustomerRequest.getFullName(), getCustomerRequest.toPageRequest())));
-
+    public ResponseEntity<PageResult<CustomerApiSchema>> getByRequest(final GetCustomerRequest getCustomerRequest) {
+        return ResponseEntity.ok(helper.toClientApiSchemaPage(this.repository.search(getCustomerRequest.getFullName(), getCustomerRequest.toPageRequest())));
     }
 }

@@ -8,30 +8,25 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 class GetCustomerTest extends AbstractApplicationTestStart {
 
     @Test
     @Sql("/db/base_customers.sql")
-    void shouldGetCustomerWithEmptyResultTest() {
+    void shouldGetCustomerWithEmptyResultTest() throws Exception {
         LocalDate birthday = LocalDate.parse("2002-05-15", DateTimeFormatter.ISO_DATE);
-        webTestClient()
-                .get()
-                .uri("/api/customers/1")
-                .exchange()
-                .expectStatus()
-                .isOk()
-                .expectBody()
-                .json("{\"id\":1,\"nome\":\"Marcela Cláudia Maitê Duarte\",\"dataNascimento\":\"2002-05-15\",\"idade\":" + Period.between(birthday, LocalDate.now()).getYears() + "}");
+        mockMvc()
+                .perform(get("/api/customers/1"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"id\":1,\"nome\":\"Marcela Cláudia Maitê Duarte\",\"dataNascimento\":\"2002-05-15\",\"idade\":" + Period.between(birthday, LocalDate.now()).getYears() + "}"));
     }
 
     @Test
-    void shouldGetCustomerNotFoundTest() {
-        webTestClient()
-                .get()
-                .uri("/api/customers/1")
-                .exchange()
-                .expectStatus()
-                .isNotFound();
+    void shouldGetCustomerNotFoundTest() throws Exception {
+        mockMvc().perform(get("/api/customers/1")).andExpect(status().isNotFound());
     }
 
 }

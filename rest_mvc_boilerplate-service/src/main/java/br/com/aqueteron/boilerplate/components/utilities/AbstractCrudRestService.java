@@ -5,8 +5,7 @@ import br.com.aqueteron.boilerplate.exception.BusinessExceptionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.http.HttpStatus;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import org.springframework.http.ResponseEntity;
 
 import java.io.Serializable;
 import java.util.Optional;
@@ -34,59 +33,61 @@ public abstract class AbstractCrudRestService<T extends Serializable, U extends 
         this.helper = helper;
     }
 
-    public Flux<U> getAll() {
-        return Flux.fromStream(
-                StreamSupport.stream(this.repository.findAll().spliterator(), true)
-                        .map(this.helper::toApiSchema)
-        );
-    }
+//    public Flux<U> getAll() {
+//        return Flux.fromStream(
+//                StreamSupport.stream(this.repository.findAll().spliterator(), true)
+//                        .map(this.helper::toApiSchema)
+//        );
+//    }
 
-    public Mono<U> post(final U newObjectSchema) {
+    public ResponseEntity<U> post(final U newObjectSchema) {
         I objectKey = this.helper.extractId(newObjectSchema);
         if (objectKey != null) {
             Optional<T> resultOptional = this.repository.findById(objectKey);
             if (resultOptional.isPresent()) {
-                return Mono.error(this.businessExceptionFactory.build(
+                throw this.businessExceptionFactory.build(
                         HttpStatus.CONFLICT,
                         MessageKeys.KEY_ALREADY_EXISTS,
                         objectKey
-                ));
+                );
             }
         }
-        return Mono.just(this.helper.toApiSchema(this.repository.save(this.helper.toDomainSchema(newObjectSchema))));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(this.helper.toApiSchema(this.repository.save(this.helper.toDomainSchema(newObjectSchema))));
     }
 
-    public Mono<U> getUnique(final I id) {
+    public ResponseEntity<U> getUnique(final I id) {
         Optional<T> resultOptional = this.repository.findById(id);
         if (resultOptional.isEmpty()) {
-            return Mono.error(this.businessExceptionFactory.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, this.entityClass.getSimpleName(), id));
+            throw this.businessExceptionFactory.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, this.entityClass.getSimpleName(), id);
         }
-        return Mono.just(this.helper.toApiSchema(resultOptional.get()));
+        return ResponseEntity.ok(this.helper.toApiSchema(resultOptional.get()));
     }
 
-    public Mono<U> put(final I id, final U newObjectSchema) {
+    public ResponseEntity<U> put(final I id, final U newObjectSchema) {
         Optional<T> resultOptional = this.repository.findById(id);
         if (resultOptional.isEmpty()) {
-            return Mono.error(this.businessExceptionFactory.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, this.entityClass.getSimpleName(), id));
+            throw this.businessExceptionFactory.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, this.entityClass.getSimpleName(), id);
         }
-        return Mono.just(this.helper.toApiSchema(this.helper.mergeDomainSchema(resultOptional.get(), newObjectSchema)));
+        return ResponseEntity.ok(this.helper.toApiSchema(this.helper.mergeDomainSchema(resultOptional.get(), newObjectSchema)));
     }
 
-    public Mono<U> patch(final I id, final U newObjectSchema) {
+    public ResponseEntity<U> patch(final I id, final U newObjectSchema) {
         Optional<T> resultOptional = this.repository.findById(id);
         if (resultOptional.isEmpty()) {
-            return Mono.error(this.businessExceptionFactory.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, this.entityClass.getSimpleName(), id));
+            throw this.businessExceptionFactory.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, this.entityClass.getSimpleName(), id);
         }
-        return Mono.just(this.helper.toApiSchema(this.helper.mergeDomainSchema(resultOptional.get(), newObjectSchema)));
+        return ResponseEntity.ok(this.helper.toApiSchema(this.helper.mergeDomainSchema(resultOptional.get(), newObjectSchema)));
     }
 
-    public Mono<Void> delete(final I id) {
+    public ResponseEntity<Void> delete(final I id) {
         Optional<T> resultOptional = this.repository.findById(id);
         if (resultOptional.isEmpty()) {
-            return Mono.error(this.businessExceptionFactory.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, this.entityClass.getSimpleName(), id));
+            throw this.businessExceptionFactory.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, this.entityClass.getSimpleName(), id);
         }
         this.repository.delete(resultOptional.get());
-        return Mono.empty();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }

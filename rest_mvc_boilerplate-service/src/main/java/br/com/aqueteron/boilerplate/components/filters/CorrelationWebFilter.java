@@ -6,20 +6,28 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import org.springframework.web.server.WebFilter;
 import org.springframework.web.server.WebFilterChain;
-import reactor.core.publisher.Mono;
 
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
 @Component
 @Order(1)
 @Slf4j
-public class CorrelationWebFilter implements WebFilter {
+public class CorrelationWebFilter extends HttpFilter {
 
     private static final String CORRELATION_ID_LOG_VAR_NAME = "correlationId";
 
@@ -33,15 +41,11 @@ public class CorrelationWebFilter implements WebFilter {
     }
 
     @Override
-    public Mono<Void> filter(final ServerWebExchange serverWebExchange, final WebFilterChain webFilterChain) {
-        String correlationId = getCorrelationIdFromHeader(serverWebExchange.getRequest());
-        serverWebExchange.getResponse()
-                .getHeaders()
-                .add(CORRELATION_ID_HTTP_HEADER_KEY, correlationId);
-        return webFilterChain.filter(serverWebExchange)
-                .doFirst(() -> addCorrelationIdToLog(correlationId))
-                .doAfterTerminate(() -> addCorrelationIdToLog(correlationId))
-                .contextWrite(ctx -> ctx.put(ContextKeys.CORRELATION_ID, correlationId));
+    public void doFilter(final HttpServletRequest request, final HttpServletResponse response, final FilterChain chain) throws IOException, ServletException {
+        String correlationId = getCorrelationIdFromHeader(request);
+        addCorrelationIdToLog(correlationId);
+        response.addHeader(CORRELATION_ID_HTTP_HEADER_KEY, correlationId);
+        chain.doFilter(request, response);
     }
 
     private void addCorrelationIdToLog(final String correlationId) {
@@ -50,11 +54,11 @@ public class CorrelationWebFilter implements WebFilter {
         this.correlationContextService.setCorrelationId(correlationId);
     }
 
-    private String getCorrelationIdFromHeader(final ServerHttpRequest request) {
-        List<String> headerValues = request.getHeaders().get(CORRELATION_ID_HTTP_HEADER_KEY);
+    private String getCorrelationIdFromHeader(final HttpServletRequest request) {
+        String headerValues = request.getHeader(CORRELATION_ID_HTTP_HEADER_KEY);
         if (headerValues == null || headerValues.isEmpty()) {
             return UUID.randomUUID().toString();
         }
-        return headerValues.get(0);
+        return headerValues;
     }
 }
