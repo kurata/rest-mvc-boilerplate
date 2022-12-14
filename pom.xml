@@ -29,7 +29,7 @@
         <log4j.version>2.19.0</log4j.version>
         <lombok.version>1.18.24</lombok.version>
         <postgresql.version>42.5.1</postgresql.version>
-        <springfox.version>3.0.0</springfox.version>
+        <springdoc.version>1.6.13</springdoc.version>
         <junit-jupiter.version>5.9.1</junit-jupiter.version>
         <testcontainers.version>1.17.6</testcontainers.version>
 
@@ -99,16 +99,11 @@
                 <version>${postgresql.version}</version>
             </dependency>
 
+            <!-- Swagger -->
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>${springfox.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-oas</artifactId>
-                <version>${springfox.version}</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-ui</artifactId>
+                <version>${springdoc.version}</version>
             </dependency>
 
             <dependency>

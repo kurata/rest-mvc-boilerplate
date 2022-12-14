@@ -1,54 +1,54 @@
 package br.com.aqueteron.boilerplate.customer.api;
 
 import br.com.aqueteron.boilerplate.components.utilities.PageResult;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-@Api(value = "customers", tags = {"customers"})
+@Tag(name = "customers")
 @RequestMapping("/api/customers")
 @Transactional
 public interface CustomerResource {
 
-    @ApiOperation(value = "Get customers", nickname = "getCustomers", notes = "Retrieve a customer list",
-            response = CustomerApiSchema.class, tags = {"customers"})
+    @Operation(summary = "Get customers", operationId = "getCustomers", description = "Retrieve a customer list",
+            tags = {"customers"})
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success to retrieve customers.", response = CustomerApiSchema.class)})
+            @ApiResponse(responseCode = "200", description = "Success to retrieve customers.")})
     @GetMapping
     ResponseEntity<PageResult<CustomerApiSchema>> getCustomers(GetCustomerRequest getCustomerRequest);
 
-    @ApiOperation(value = "Post new customer", nickname = "postCustomer", notes = "Create a new customer",
-            response = CustomerApiSchema.class, tags = {"customers"})
+    @Operation(summary = "Post new customer", operationId = "postCustomer", description = "Create a new customer",
+            tags = {"customers"})
     @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Success to create a new customer.", response = CustomerApiSchema.class)})
+            @ApiResponse(responseCode = "201", description = "Success to create a new customer.")})
     @PostMapping
     ResponseEntity<CustomerApiSchema> postCustomer(@RequestBody CustomerApiSchema postClientRequest);
 
-    @ApiOperation(value = "Get customer", nickname = "getCustomer", notes = "Retrieve a customer", response = CustomerApiSchema.class, tags = {"customers"})
+    @Operation(summary = "Get customer", operationId = "getCustomer", description = "Retrieve a customer", tags = {"customers"})
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success to load a customer.", response = CustomerApiSchema.class)})
+            @ApiResponse(responseCode = "200", description = "Success to load a customer.")})
     @GetMapping("/{key}")
     ResponseEntity<CustomerApiSchema> getCustomer(@PathVariable Long key);
 
-    @ApiOperation(value = "Put customer", nickname = "putCustomer", notes = "Update the customer attributes", response = CustomerApiSchema.class, tags = {"customers"})
+    @Operation(summary = "Put customer", operationId = "putCustomer", description = "Update the customer attributes", tags = {"customers"})
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success to update customer attributes.", response = CustomerApiSchema.class)})
+            @ApiResponse(responseCode = "200", description = "Success to update customer attributes.")})
     @PutMapping("/{key}")
     ResponseEntity<CustomerApiSchema> putCustomer(@PathVariable Long key, @RequestBody CustomerApiSchema customerApiSchema);
 
-    @ApiOperation(value = "Patch customer", nickname = "patchCustomer", notes = "Update the customer attributes", response = CustomerApiSchema.class, tags = {"customers"})
+    @Operation(summary = "Patch customer", operationId = "patchCustomer", description = "Update the customer attributes", tags = {"customers"})
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success to update customer attributes.", response = CustomerApiSchema.class)})
+            @ApiResponse(responseCode = "200", description = "Success to update customer attributes.")})
     @PatchMapping("/{key}")
     ResponseEntity<CustomerApiSchema> patchCustomer(@PathVariable Long key, @RequestBody CustomerApiSchema customerApiSchema);
 
-    @ApiOperation(value = "Delete customer", nickname = "deleteCustomer", notes = "Delete the customer", response = Void.class, tags = {"customers"})
+    @Operation(summary = "Delete customer", operationId = "deleteCustomer", description = "Delete the customer", tags = {"customers"})
     @ApiResponses(value = {
-            @ApiResponse(code = 204, message = "Success to delete a customer.", response = Void.class)})
+            @ApiResponse(responseCode = "204", description = "Success to delete a customer.")})
     @DeleteMapping("/{key}")
     ResponseEntity<Void> deleteCustomer(@PathVariable Long key);
 

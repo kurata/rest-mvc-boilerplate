@@ -72,13 +72,8 @@
 
         <!-- Swagger -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-oas</artifactId>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
         </dependency>
 
         <dependency>

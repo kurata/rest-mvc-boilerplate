@@ -44,4 +44,7 @@ spring:
       enabled: always
   mvc:
     pathmatch:
-      matching-strategy: ant_path_matcher
+      matching-strategy: ant-path-matcher
+
+springdoc:
+  show-actuator: true
