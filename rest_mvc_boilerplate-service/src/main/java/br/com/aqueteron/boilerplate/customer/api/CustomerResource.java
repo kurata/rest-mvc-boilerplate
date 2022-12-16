@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public interface CustomerResource {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Success to retrieve customers.")})
     @GetMapping
-    ResponseEntity<PageResult<CustomerApiSchema>> getCustomers(GetCustomerRequest getCustomerRequest);
+    ResponseEntity<PageResult<CustomerApiSchema>> getCustomers(@ParameterObject GetCustomerRequest getCustomerRequest);
 
     @Operation(summary = "Post new customer", operationId = "postCustomer", description = "Create a new customer",
             tags = {"customers"})
