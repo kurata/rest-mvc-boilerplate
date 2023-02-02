@@ -1,0 +1,9 @@
+profile: aws
+
+spring:
+  datasource:
+    url: jdbc:postgresql://<database_url>:5432/rest_mvc_boilerplate
+    username: <database_username>
+    password: <database_password>
+  jpa:
+    show-sql: true
