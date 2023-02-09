@@ -7,6 +7,7 @@ class ApplicationTest extends AbstractApplicationTestStart {
 
     @Test
     void contextLoad() {
-//Test to test the context load
+        //Test to test the context load
     }
+
 }

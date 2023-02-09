@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface CustomerRepository extends PagingAndSortingRepository<Customer, Long> {
 
-    @Query("FROM Customer c WHERE lower(c.fullName) like %:fullName%")
+    @Query("FROM Customer c WHERE ( :fullName is null or lower(c.fullName) like %:fullName% )")
     Page<Customer> search(@Param("fullName") String fullName, Pageable toPageRequest);
 
 }

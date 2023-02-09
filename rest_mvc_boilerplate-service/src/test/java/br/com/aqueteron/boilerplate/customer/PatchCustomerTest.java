@@ -47,7 +47,6 @@ class PatchCustomerTest extends AbstractApplicationTestStart {
     @Sql("/db/base_customers.sql")
     void shouldPatchCustomerUpdatingBirthDateTest() throws Exception {
         LocalDate thirtyYearsAgo = LocalDate.now().minusYears(30l);
-
         mockMvc()
                 .perform(
                         patch("/api/customers/1")
@@ -61,7 +60,6 @@ class PatchCustomerTest extends AbstractApplicationTestStart {
     @Test
     void shouldPatchCustomerUpdatingBirthDateNotFoundTest() throws Exception {
         LocalDate thirtyYearsAgo = LocalDate.now().minusYears(30l);
-
         mockMvc()
                 .perform(
                         patch("/api/customers/1")
@@ -70,4 +68,5 @@ class PatchCustomerTest extends AbstractApplicationTestStart {
                 )
                 .andExpect(status().isNotFound());
     }
+
 }

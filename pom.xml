@@ -10,6 +10,10 @@
 
     <name>Rest MVC Boilerplate - Project</name>
 
+    <modules>
+        <module>rest_mvc_boilerplate-service</module>
+    </modules>
+
     <properties>
         <java.version>11</java.version>
         <encoding>UTF-8</encoding>
@@ -32,6 +36,7 @@
         <springdoc.version>1.6.13</springdoc.version>
         <junit-jupiter.version>5.9.1</junit-jupiter.version>
         <testcontainers.version>1.17.6</testcontainers.version>
+        <javafaker.version>1.0.2</javafaker.version>
 
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
@@ -132,6 +137,13 @@
                 <groupId>org.testcontainers</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.javafaker</groupId>
+                <artifactId>javafaker</artifactId>
+                <version>${javafaker.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
@@ -245,8 +257,4 @@
             </properties>
         </profile>
     </profiles>
-
-    <modules>
-        <module>rest_mvc_boilerplate-service</module>
-    </modules>
 </project>

@@ -8,11 +8,9 @@ import br.com.aqueteron.boilerplate.components.utilities.PageResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Transactional
 @Slf4j
 public class CustomerController implements CustomerResource {
 
@@ -52,4 +50,5 @@ public class CustomerController implements CustomerResource {
     public ResponseEntity<Void> deleteCustomer(final Long key) {
         return this.service.delete(key);
     }
+
 }

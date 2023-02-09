@@ -1,5 +1,7 @@
 package br.com.aqueteron.boilerplate.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mock;
@@ -37,12 +39,28 @@ public abstract class AbstractApplicationTestStart {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    private Faker faker;
+
     public int port() {
         return this.port;
     }
 
-    public MockMvc mockMvc() {
+    protected MockMvc mockMvc() {
         return this.mockMvc;
+    }
+
+    protected ObjectMapper objectMapper() {
+        return this.objectMapper;
+    }
+
+    protected Faker faker() {
+        if (this.faker == null) {
+            this.faker = new Faker();
+        }
+        return this.faker;
     }
 
     @AfterEach

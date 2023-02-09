@@ -21,4 +21,5 @@ class DeleteCustomerTest extends AbstractApplicationTestStart {
     void shouldDeleteCustomerNotFoundTest() throws Exception {
         mockMvc().perform(delete("/api/customers/1")).andExpect(status().isNotFound());
     }
+
 }

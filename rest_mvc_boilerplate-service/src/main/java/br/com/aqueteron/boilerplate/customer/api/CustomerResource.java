@@ -7,12 +7,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "customers")
 @RequestMapping("/api/customers")
-@Transactional
 public interface CustomerResource {
 
     @Operation(summary = "Get customers", operationId = "getCustomers", description = "Retrieve a customer list",

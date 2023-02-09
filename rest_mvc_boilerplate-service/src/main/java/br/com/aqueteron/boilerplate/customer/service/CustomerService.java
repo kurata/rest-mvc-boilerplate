@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -29,6 +30,6 @@ public class CustomerService extends AbstractCrudRestService<Customer, CustomerA
     }
 
     public ResponseEntity<PageResult<CustomerApiSchema>> getByRequest(final GetCustomerRequest getCustomerRequest) {
-        return ResponseEntity.ok(helper.toClientApiSchemaPage(this.repository.search(getCustomerRequest.getFullName(), getCustomerRequest.toPageRequest())));
+        return ResponseEntity.ok(this.helper.toClientApiSchemaPage(this.repository.search(getCustomerRequest.getFullName(), getCustomerRequest.toPageRequest())));
     }
 }

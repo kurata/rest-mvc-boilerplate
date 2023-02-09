@@ -41,4 +41,5 @@ public class CustomerApiSchema implements Serializable {
             this.age = null;
         }
     }
+
 }
