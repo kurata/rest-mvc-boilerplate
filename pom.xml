@@ -36,7 +36,7 @@
         <springdoc.version>1.6.13</springdoc.version>
         <junit-jupiter.version>5.9.1</junit-jupiter.version>
         <testcontainers.version>1.17.6</testcontainers.version>
-        <javafaker.version>1.0.2</javafaker.version>
+        <datafaker.version>1.7.0</datafaker.version>
 
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
@@ -128,9 +128,9 @@
             </dependency>
 
             <dependency>
-                <groupId>com.github.javafaker</groupId>
-                <artifactId>javafaker</artifactId>
-                <version>${javafaker.version}</version>
+                <groupId>net.datafaker</groupId>
+                <artifactId>datafaker</artifactId>
+                <version>${datafaker.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
