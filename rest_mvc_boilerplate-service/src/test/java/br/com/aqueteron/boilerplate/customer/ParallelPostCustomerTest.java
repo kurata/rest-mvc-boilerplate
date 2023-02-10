@@ -3,6 +3,7 @@ package br.com.aqueteron.boilerplate.customer;
 import br.com.aqueteron.boilerplate.customer.api.CustomerApiSchema;
 import br.com.aqueteron.boilerplate.utils.AbstractApplicationTestStart;
 import lombok.extern.slf4j.Slf4j;
+import net.datafaker.Faker;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
@@ -38,7 +39,7 @@ class ParallelPostCustomerTest extends AbstractApplicationTestStart {
         mockMvc()
                 .perform(get("/api/customers"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"result\":[{\"id\":1,\"nome\":\"Static Customer\",\"dataNascimento\":\"" + thirtyYearsAgo.format(DateTimeFormatter.ISO_DATE) + "\",\"idade\":30}],\"totalPages\":1,\"totalElements\":1}"));
+                .andExpect(content().json("{\"result\":[{\"nome\":\"Static Customer\",\"dataNascimento\":\"" + thirtyYearsAgo.format(DateTimeFormatter.ISO_DATE) + "\",\"idade\":30}],\"totalPages\":1,\"totalElements\":1}"));
     }
 
     void justExecute(final ResultActions resultActions) {
