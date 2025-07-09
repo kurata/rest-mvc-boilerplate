@@ -1,0 +1,47 @@
+profile: local
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bp_database
+    username: bpuser
+    password: bppassword
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  ssl:
+    bundle:
+      jks:
+        web:
+          key:
+            alias: "People Register Dev"
+            password: ""
+          keystore:
+            location: "classpath:application.p12"
+            password: "secret"
+            type: "PKCS12"
+        server:
+          key:
+            alias: "People Register Dev"
+            password: ""
+          keystore:
+            location: "classpath:application.p12"
+            password: "secret"
+            type: "PKCS12"
+          truststore:
+            location: "classpath:truststore.p12"
+            password: "secret"
+            type: "PKCS12"
+logging:
+  level:
+    org.hibernate.sql: debug
+    org.springframework.orm.jpa: debug
+    br.com.aqueteron: debug
+server:
+  port: 8443
+  ssl:
+    bundle: web
+
+springdoc:
+  show-actuator: true
