@@ -4,6 +4,7 @@ services:
     image: postgres:latest
     container_name: rest_mvc_boilerplate_postgres_local
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
       POSTGRES_DB: rest_mvc_boilerplate
       TZ: UTC
