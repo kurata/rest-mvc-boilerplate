@@ -31,7 +31,7 @@
         <spring-security-oauth2.version>2.6.8</spring-security-oauth2.version>
         <spring-security-jwt.version>1.1.1.RELEASE</spring-security-jwt.version>
         <log4j.version>2.19.0</log4j.version>
-        <lombok.version>1.18.24</lombok.version>
+        <lombok.version>1.18.38</lombok.version>
         <postgresql.version>42.5.1</postgresql.version>
         <springdoc.version>1.6.13</springdoc.version>
         <junit-jupiter.version>5.9.1</junit-jupiter.version>
