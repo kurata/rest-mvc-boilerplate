@@ -1,11 +1,9 @@
-openapi: 3.0.3
+openapi: 3.0.4
 info:
   title: Boilerplate API
   description: |-
     API Boilerplate.
   version: 1.0.0
-servers:
-  - url: 'https://localhost:8443/bp/api'
 tags:
   - name: Customer
     description: Customer registration
@@ -17,15 +15,32 @@ paths:
       summary: Search Customers
       description: Search Customers
       operationId: searchCustomers
+      parameters:
+        - name: page
+          in: query
+          description: It indicate the page number
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 0
+            example: 3
+        - name: size
+          in: query
+          description: It indicate the page size
+          required: true
+          schema:
+            type: integer
+            format: int32
+            default: 50
+            example: 150
       responses:
         '200':
           description: Success in Customers search
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Customer'
+                $ref: '#/components/schemas/PageResultCustomer'
         '400':
           description: Error to search Customers
           content:
@@ -63,9 +78,9 @@ paths:
         description: Customer id
         required: true
         schema:
-          type: string
-          format: uuid
-          example: 18aad3c4-b9e8-4884-bf74-e049ce0fbc79
+          type: integer
+          format: int64
+          example: 183
     get:
       tags:
         - Customer
@@ -145,19 +160,44 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - Customer
+      summary: Delete Customer
+      description: Delete Customer
+      operationId: DeleteCustomer
+      responses:
+        '200':
+          description: Success to delete Customer
+        '400':
+          description: Error to delete Customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Customer not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
     Customer:
       type: object
       properties:
         id:
-          type: string
-          format: uudi
+          type: integer
+          format: int64
           readOnly: true
-          example: 84736dce-3bbb-4689-83aa-575271600047
+          example: 847
         name:
           type: string
           example: Marry
+        birth:
+          type: string
+          format: date
+          example: 1980-11-27
     ErrorResponse:
       type: object
       properties:
@@ -185,10 +225,6 @@ components:
     PageResult:
       type: object
       properties:
-        result:
-          type: array
-          items:
-            $ref: "#/components/schemas/Customer"
         totalPages:
           type: integer
           format: int32
@@ -197,3 +233,12 @@ components:
           type: integer
           format: int64
           example: 435
+    PageResultCustomer:
+      allOf:
+        - $ref: '#/components/schemas/PageResult'
+        - type: object
+          properties:
+            result:
+              type: array
+              items:
+                $ref: '#/components/schemas/Customer'

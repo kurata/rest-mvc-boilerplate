@@ -13,6 +13,10 @@ logging:
   pattern:
     console: "%-6r %d{ISO8601} %highlight(%-5level) [%blue(%t)] %yellow(%X{correlationId}) %magenta(%C{1}): %msg%n%throwable"
 
+openapi:
+  boilerplate:
+    base-path: /api
+
 # Actuator endpoints
 management:
   endpoint:
@@ -32,7 +36,13 @@ management:
 
 server:
   servlet:
-    context-path: /bp/api
+    context-path: /bp
+  tomcat:
+    max-connections: 8192 # Maximum number of connections Tomcat will accept.
+    accept-count: 100     # Maximum number of requests in the waiting queue.
+    threads:
+      max: 200            # Maximum number of worker threads in the pool.
+      min-spare: 10       # Minimum number of idle threads in the pool.
 
 spring:
   datasource:
@@ -56,9 +66,3 @@ spring:
     basename: messages/messages
   profiles:
     active: ${profiles_active:local}
-  output:
-    ansi:
-      enabled: always
-  mvc:
-    pathmatch:
-      matching-strategy: ant-path-matcher

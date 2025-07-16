@@ -42,6 +42,14 @@ server:
   port: 8443
   ssl:
     bundle: web
+  tomcat:
+    basedir: "log/tomcat"
+    accesslog:
+      enabled: true
+      pattern: "%t %a %r %s (%D microseconds)"
 
 springdoc:
   show-actuator: true
+  swagger-ui:
+    syntaxHighlight:
+      theme: tomorrow-night

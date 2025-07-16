@@ -6,11 +6,12 @@ import com.tngtech.archunit.lang.ArchRule;
 import org.springframework.data.repository.Repository;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
-@AnalyzeClasses(packages = "br.com.aqueteron.people.registration")
+@AnalyzeClasses(packages = "br.com.aqueteron.bp.service")
 public class ClassTypeDependencyRulesTest {
 
     // 'access' catches only violations by real accesses, i.e. accessing a field, calling a method; compare 'dependOn' further down
@@ -18,7 +19,7 @@ public class ClassTypeDependencyRulesTest {
     @ArchTest
     static final ArchRule services_should_not_access_controllers =
             noClasses().that().areAnnotatedWith(Service.class)
-                    .should().accessClassesThat().areAnnotatedWith(Controller.class);
+                    .should().accessClassesThat().areAnnotatedWith(Controller.class).orShould().beAnnotatedWith(RestController.class);
 
     @ArchTest
     static final ArchRule persistence_should_not_access_services =
@@ -28,7 +29,7 @@ public class ClassTypeDependencyRulesTest {
     @ArchTest
     static final ArchRule services_should_only_be_accessed_by_controllers_or_other_services =
             classes().that().areAnnotatedWith(Service.class)
-                    .should().onlyBeAccessed().byClassesThat().areAnnotations().orShould().beAnnotatedWith(Controller.class).orShould().beAnnotatedWith(Service.class);
+                    .should().onlyBeAccessed().byClassesThat().areAnnotations().orShould().beAnnotatedWith(Controller.class).orShould().beAnnotatedWith(RestController.class).orShould().beAnnotatedWith(Service.class);
 
     @ArchTest
     static final ArchRule services_should_only_access_persistence_or_other_services =
@@ -40,7 +41,7 @@ public class ClassTypeDependencyRulesTest {
     @ArchTest
     static final ArchRule services_should_not_depend_on_controllers =
             noClasses().that().areAnnotatedWith(Service.class)
-                    .should().dependOnClassesThat().areAnnotatedWith(Controller.class);
+                    .should().dependOnClassesThat().areAnnotatedWith(Controller.class).orShould().beAnnotatedWith(RestController.class);
 
     @ArchTest
     static final ArchRule persistence_should_not_depend_on_services =

@@ -8,16 +8,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.repository.Repository;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RestController;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 
-@AnalyzeClasses(packages = "br.com.aqueteron.people.registration")
+@AnalyzeClasses(packages = "br.com.aqueteron.bp.service")
 public class NamingConventionTest {
 
     @ArchTest
     static final ArchRule controllers_should_be_suffixed =
             classes()
-                    .that().areAnnotatedWith(Controller.class)
+                    .that().areAnnotatedWith(Controller.class).or().areAnnotatedWith(RestController.class)
                     .should().haveSimpleNameEndingWith("Controller");
 
     @ArchTest

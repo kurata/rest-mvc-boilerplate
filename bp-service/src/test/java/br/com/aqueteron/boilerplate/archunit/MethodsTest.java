@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 
-@AnalyzeClasses(packages = "br.com.aqueteron.people.registration")
+@AnalyzeClasses(packages = "br.com.aqueteron.bp.service")
 public class MethodsTest {
 
     @ArchTest

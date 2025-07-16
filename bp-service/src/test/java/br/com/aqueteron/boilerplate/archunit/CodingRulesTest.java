@@ -8,7 +8,7 @@ import com.tngtech.archunit.lang.ArchRule;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 import static com.tngtech.archunit.library.GeneralCodingRules.*;
 
-@AnalyzeClasses(packages = "br.com.aqueteron.people.registration")
+@AnalyzeClasses(packages = "br.com.aqueteron.bp.service")
 public class CodingRulesTest {
 
     @ArchTest

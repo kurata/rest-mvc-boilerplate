@@ -6,7 +6,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -26,23 +25,13 @@ public abstract class AbstractApplicationTestStart {
     @Container
     public static PostgresContainer POSTGRES_SQL_CONTAINER = PostgresContainer.getInstance();
 
-    @LocalServerPort
-    private int port;
-
-    @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @Autowired
     private ObjectMapper objectMapper;
 
     private Faker faker;
-
-    public int port() {
-        return this.port;
-    }
 
     protected MockMvc mockMvc() {
         return this.mockMvc;
@@ -61,8 +50,8 @@ public abstract class AbstractApplicationTestStart {
 
     @AfterEach
     public void afterEach() {
-        this.jdbcTemplate.execute("delete from rest_mvc_boilerplate.customer");
-        this.jdbcTemplate.execute("alter sequence rest_mvc_boilerplate.customer_id_seq restart with 1");
+        this.jdbcTemplate.execute("delete from bp_database.customer");
+        this.jdbcTemplate.execute("alter sequence bp_database.customer_id_seq restart with 1");
     }
 
 }
