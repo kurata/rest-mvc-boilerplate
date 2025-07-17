@@ -1,14 +1,20 @@
 version: "3.0"
 services:
   postgres:
-    image: postgres:latest
-    container_name: rest_mvc_boilerplate_postgres_local
+    image: postgres:17
+    container_name: bp_postgres
+    networks:
+      - bp_network
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: rest_mvc_boilerplate
+      POSTGRES_USER: bpuser
+      POSTGRES_PASSWORD: bppassword
+      POSTGRES_DB: bp_database
       TZ: UTC
     ports:
-      - 5432:5432
+      - "5432:5432"
     volumes:
-      - ./postgres/data:/var/lib/postgresql/data
+      - ./postgres/data:/var/lib/postgresql/data:rw
+      - ./postgres/scripts:/docker-entrypoint-initdb.d:ro
+networks:
+  bp_network:
+    driver: bridge

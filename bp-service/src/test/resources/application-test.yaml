@@ -1,0 +1,9 @@
+profile: test
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bp_database
+    username: bp_user
+    password: password
+  jpa:
+    show-sql: true
