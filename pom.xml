@@ -204,7 +204,7 @@
                         </argLine>
                         <skipTests>${skip.unit.test}</skipTests>
                         <excludes>
-                            <exclude>**/*IntegrationTest.java</exclude>
+                            <exclude>**/*IT.java</exclude>
                         </excludes>
                     </configuration>
                     <executions>
@@ -220,7 +220,7 @@
                                     <exclude>none</exclude>
                                 </excludes>
                                 <includes>
-                                    <include>**/*IntegrationTest.java</include>
+                                    <include>**/*IT.java</include>
                                 </includes>
                             </configuration>
                         </execution>

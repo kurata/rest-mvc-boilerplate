@@ -1,4 +1,4 @@
-package br.com.aqueteron.boilerplate.archunit;
+package br.com.aqueteron.bp.service.archunit;
 
 import com.tngtech.archunit.core.domain.JavaClasses;
 import com.tngtech.archunit.junit.AnalyzeClasses;
@@ -25,11 +25,9 @@ public class CodingRulesTest {
     @ArchTest
     private static final ArchRule no_jodatime = NO_CLASSES_SHOULD_USE_JODATIME;
 
-    @ArchTest
-    private static final ArchRule no_field_injection = NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
-
-    @ArchTest
-    private static final ArchRule no_classes_should_use_field_injection = NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
+    //Method commented because we use field injection in tests classes.
+//    @ArchTest
+//    private static final ArchRule no_classes_should_use_field_injection = NO_CLASSES_SHOULD_USE_FIELD_INJECTION;
 
     @ArchTest
     private static final ArchRule deprecated_api_should_not_be_used = DEPRECATED_API_SHOULD_NOT_BE_USED;

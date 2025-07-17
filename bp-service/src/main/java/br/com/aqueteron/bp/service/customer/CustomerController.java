@@ -33,7 +33,7 @@ public class CustomerController implements CustomerApi {
     @Override
     public ResponseEntity<Void> deleteCustomer(final Long customerId) {
         this.customerService.deleteCustomer(customerId);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 
     @Override

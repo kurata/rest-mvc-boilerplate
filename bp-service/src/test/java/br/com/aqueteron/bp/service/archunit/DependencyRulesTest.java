@@ -1,4 +1,4 @@
-package br.com.aqueteron.boilerplate.archunit;
+package br.com.aqueteron.bp.service.archunit;
 
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;

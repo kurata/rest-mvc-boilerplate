@@ -2,8 +2,8 @@ profile: test
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/rest_mvc_boilerplate
-    username: rest_mvc_boilerplate_user
+    url: jdbc:postgresql://localhost:5432/bp_database
+    username: bp_user
     password: password
   jpa:
     show-sql: true

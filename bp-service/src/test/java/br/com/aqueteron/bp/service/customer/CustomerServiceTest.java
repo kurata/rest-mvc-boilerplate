@@ -1,6 +1,6 @@
 package br.com.aqueteron.bp.service.customer;
 
-import br.com.aqueteron.bp.service.exception.ExceptionFactory;
+import br.com.aqueteron.bp.service.exception.BusinessFactory;
 import br.com.aqueteron.bp.service.utils.MessageKeys;
 import net.datafaker.Faker;
 import org.junit.jupiter.api.Test;
@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -27,7 +28,7 @@ class CustomerServiceTest {
     CustomerRepository customerRepositoryMock;
 
     @Mock
-    ExceptionFactory exceptionFactoryMock;
+    BusinessFactory businessFactoryMock;
 
     @Test
     void createCustomer() {
@@ -41,15 +42,18 @@ class CustomerServiceTest {
     @Test
     void deleteCustomer() {
         Long customerId = faker.random().nextLong();
+        Customer customer = CustomerStubs.customerStub();
+        when(this.customerRepositoryMock.findById(eq(customerId))).thenReturn(Optional.of(customer));
 
         this.customerService.deleteCustomer(customerId);
 
-        verify(this.customerRepositoryMock).deleteById(customerId);
+        verify(this.customerRepositoryMock).delete(customer);
     }
 
     @Test
     void fullUpdateCustomer() {
         Customer customer = CustomerStubs.customerStub();
+        when(this.customerRepositoryMock.findById(eq(customer.getId()))).thenReturn(Optional.of(customer));
         when(this.customerRepositoryMock.save(customer)).thenReturn(customer);
 
         Customer customerResponse = this.customerService.fullUpdateCustomer(customer);
@@ -81,7 +85,7 @@ class CustomerServiceTest {
     void readCustomer_whenNotFound() {
         Long customerId = faker.random().nextLong();
         when(this.customerRepositoryMock.findById(customerId)).thenReturn(Optional.empty());
-        when(this.exceptionFactoryMock.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, Customer.class.getSimpleName(), customerId)).thenThrow(new RuntimeException());
+        when(this.businessFactoryMock.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, Customer.class.getSimpleName(), customerId)).thenThrow(new RuntimeException());
 
         assertThrows(RuntimeException.class, () -> this.customerService.readCustomer(customerId));
     }

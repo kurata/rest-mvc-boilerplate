@@ -1,4 +1,4 @@
-INSERT INTO rest_mvc_boilerplate.customer (name, birth)
+INSERT INTO bp_database.customer (name, birth)
 VALUES ('Marcela Cláudia Maitê Duarte', TO_DATE('15/05/2002', 'DD/MM/YYYY')),
        ('Leonardo Enzo Viana', TO_DATE('08/01/1995', 'DD/MM/YYYY')),
        ('Victor Carlos Eduardo Cláudio Alves', TO_DATE('21/05/1981', 'DD/MM/YYYY')),

@@ -48,7 +48,7 @@ class CustomerControllerTest {
     @Test
     void deleteCustomer() {
         ResponseEntity<Void> responseEntity = this.customerController.deleteCustomer(faker.random().nextLong());
-        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(HttpStatus.NO_CONTENT, responseEntity.getStatusCode());
     }
 
     @Test

@@ -203,7 +203,6 @@
                                 <useTags>true</useTags>
                                 <library>spring-boot</library>
                                 <requestMappingMode>api_interface</requestMappingMode>
-<!--                                <useOneOfInterfaces>true</useOneOfInterfaces>-->
                             </configOptions>
                         </configuration>
                     </execution>

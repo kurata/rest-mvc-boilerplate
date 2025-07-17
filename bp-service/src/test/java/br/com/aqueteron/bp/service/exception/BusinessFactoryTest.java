@@ -16,10 +16,10 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @MockitoSettings
-class ExceptionFactoryTest {
+class BusinessFactoryTest {
 
     @InjectMocks
-    private ExceptionFactory exceptionFactory;
+    private BusinessFactory businessFactory;
 
     @Mock
     private MessageSource messageSource;
@@ -27,7 +27,7 @@ class ExceptionFactoryTest {
     @Test
     void shouldBuild_withThrowable() {
         Throwable throwable = new Throwable("Throwable message");
-        BusinessException businessException = this.exceptionFactory.build(throwable);
+        BusinessException businessException = this.businessFactory.build(throwable);
 
         assertNotNull(businessException);
         assertEquals(BusinessException.class, businessException.getClass());
@@ -45,7 +45,7 @@ class ExceptionFactoryTest {
         String message = "message";
         when(this.messageSource.getMessage(eq(messageKey), any(), eq(Locale.getDefault()))).thenReturn(message);
 
-        BusinessException businessException = this.exceptionFactory.build(throwable, messageKey, object);
+        BusinessException businessException = this.businessFactory.build(throwable, messageKey, object);
 
         assertNotNull(businessException);
         assertEquals(BusinessException.class, businessException.getClass());
@@ -63,7 +63,7 @@ class ExceptionFactoryTest {
         String message = "Unable to load business exception message.";
         when(this.messageSource.getMessage(eq(messageKey), any(), eq(Locale.getDefault()))).thenThrow(NoSuchMessageException.class);
 
-        BusinessException businessException = this.exceptionFactory.build(throwable, messageKey, object);
+        BusinessException businessException = this.businessFactory.build(throwable, messageKey, object);
 
         assertNotNull(businessException);
         assertEquals(BusinessException.class, businessException.getClass());
@@ -80,7 +80,7 @@ class ExceptionFactoryTest {
         String message = "message";
         when(this.messageSource.getMessage(eq(messageKey), any(), eq(Locale.getDefault()))).thenReturn(message);
 
-        BusinessException businessException = this.exceptionFactory.build(messageKey, object);
+        BusinessException businessException = this.businessFactory.build(messageKey, object);
 
         assertNotNull(businessException);
         assertEquals(BusinessException.class, businessException.getClass());
@@ -99,7 +99,7 @@ class ExceptionFactoryTest {
         String message = "message";
         when(this.messageSource.getMessage(eq(messageKey), any(), eq(Locale.getDefault()))).thenReturn(message);
 
-        BusinessException businessException = this.exceptionFactory.build(httpStatus, messageKey, object);
+        BusinessException businessException = this.businessFactory.build(httpStatus, messageKey, object);
 
         assertNotNull(businessException);
         assertEquals(BusinessException.class, businessException.getClass());
@@ -117,7 +117,7 @@ class ExceptionFactoryTest {
         String message = "Unable to load business exception message.";
         when(this.messageSource.getMessage(eq(messageKey), any(), eq(Locale.getDefault()))).thenThrow(NoSuchMessageException.class);
 
-        BusinessException businessException = this.exceptionFactory.build(httpStatus, messageKey, object);
+        BusinessException businessException = this.businessFactory.build(httpStatus, messageKey, object);
 
         assertNotNull(businessException);
         assertEquals(BusinessException.class, businessException.getClass());

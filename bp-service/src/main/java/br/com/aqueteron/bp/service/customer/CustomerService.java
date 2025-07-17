@@ -1,6 +1,6 @@
 package br.com.aqueteron.bp.service.customer;
 
-import br.com.aqueteron.bp.service.exception.ExceptionFactory;
+import br.com.aqueteron.bp.service.exception.BusinessFactory;
 import br.com.aqueteron.bp.service.utils.MessageKeys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,17 +16,19 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
 
-    private final ExceptionFactory exceptionFactory;
+    private final BusinessFactory businessFactory;
 
     public Customer createCustomer(final Customer customer) {
         return this.customerRepository.save(customer);
     }
 
     public void deleteCustomer(final Long customerId) {
-        this.customerRepository.deleteById(customerId);
+        Customer customer = readCustomer(customerId);
+        this.customerRepository.delete(customer);
     }
 
     public Customer fullUpdateCustomer(final Customer customer) {
+        this.readCustomer(customer.getId());
         return this.customerRepository.save(customer);
     }
 
@@ -35,13 +37,16 @@ public class CustomerService {
         if (customer.getName() != null) {
             customerPersisted.setName(customer.getName());
         }
+        if (customer.getBirth() != null) {
+            customerPersisted.setBirth(customer.getBirth());
+        }
         return customerPersisted;
     }
 
     public Customer readCustomer(final Long customerId) {
         return this.customerRepository
                 .findById(customerId)
-                .orElseThrow(() -> exceptionFactory.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, Customer.class.getSimpleName(), customerId));
+                .orElseThrow(() -> businessFactory.build(HttpStatus.NOT_FOUND, MessageKeys.DEFAULT_NOT_FOUND, Customer.class.getSimpleName(), customerId));
     }
 
     public Page<Customer> searchCustomer(Pageable pageable) {

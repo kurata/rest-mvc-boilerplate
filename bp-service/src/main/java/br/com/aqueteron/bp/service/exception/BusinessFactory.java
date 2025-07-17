@@ -12,7 +12,7 @@ import java.util.Locale;
 @RequiredArgsConstructor
 @Component
 @Slf4j
-public class ExceptionFactory {
+public class BusinessFactory {
 
     private static final String UNABLE_LOAD_BUSINESS_EXCEPTION_MESSAGE = "Unable to load business exception message.";
 
