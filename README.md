@@ -19,41 +19,15 @@ It is designed to help you start new Spring Boot projects faster by providing a 
 
 ✅ Spring Boot starter template  
 ✅ Layered MVC structure  
-✅ Simple REST example (PersonController, PersonService, PersonRepository)  
+✅ Simple REST example
 ✅ Easy to extend with new entities/resources  
 ✅ Maven-based build
 
 ---
 
-## 🗂️ Project Structure
-
-```
-src
-└── main
-└── java
-└── com
-└── kurata
-└── restmvc
-├── controller
-│ └── PersonController.java
-├── service
-│ └── PersonService.java
-├── repository
-│ └── PersonRepository.java
-└── model
-└── Person.java
-```
-
-✅ `controller` – handles API endpoints  
-✅ `service` – implements business logic  
-✅ `repository` – data persistence layer (JPA)  
-✅ `model` – domain/entity classes
-
----
-
 ## 🛠️ Technologies Used
 
-- Java 11+
+- Java 17+
 - Spring Boot
 - Spring Web
 - Spring Data JPA
@@ -65,7 +39,7 @@ src
 
 ### ✅ Prerequisites
 
-- Java 11 or higher
+- Java 17 or higher
 - Maven 3.x
 
 ### ✅ Clone the Repository
@@ -97,12 +71,12 @@ http://localhost:8080
 
 ## 📚 Example Endpoint
 
-> Example (if you keep the sample PersonController):
-- GET /api/person – list all people
-- POST /api/person – create a new person
-- GET /api/person/{id} – get person by ID
-- PUT /api/person/{id} – update person
-- DELETE /api/person/{id} – delete person
+> Example (if you keep the sample CustomerController):
+- GET /api/customers – list all customers
+- POST /api/customers – create a new customer
+- GET /api/customers/{id} – get customer by ID
+- PUT /api/customers/{id} – update customer
+- DELETE /api/customers/{id} – delete customer
 
 *(Endpoints may vary depending on how you customize the boilerplate.)*
 
