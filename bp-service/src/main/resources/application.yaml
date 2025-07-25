@@ -50,13 +50,13 @@ spring:
     username: ${POSTGRESQL_USER}
     password: ${POSTGRESQL_PASSWORD}
   flyway:
-    schemas: bp_database
+    schemas: ${BP_SCHEMA:bp_database}
   jpa:
     hibernate:
       ddl-auto: validate
     properties:
       hibernate:
-        default_schema: bp_database
+        default_schema: ${BP_SCHEMA:bp_database}
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: false
         temp.use_jdbc_metadata_defaults: false

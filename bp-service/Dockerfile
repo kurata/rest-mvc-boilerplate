@@ -1,15 +1,11 @@
-FROM openjdk:11
+FROM amazoncorretto:17
 
 ARG JAR_FILE
-ARG PROFILE=stand-alone
+ENV PROFILE="stand-alone"
 
-WORKDIR /app
+EXPOSE 8443
 
-ENV spring_profiles_active=${PROFILE}
-ENV jar_file=${JAR_FILE}
-
-ADD ${JAR_FILE} application.jar
-
-EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "application.jar" ]
+RUN mkdir bp-server
+ADD ${JAR_FILE} /bp-server/bp-server.jar
+WORKDIR /bp-server
+ENTRYPOINT ["/usr/bin/java", "-jar", "bp-server.jar", "--spring.profiles.active=${PROFILE}"]

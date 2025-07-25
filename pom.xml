@@ -39,7 +39,7 @@
 
         <archunit.version>1.4.1</archunit.version>
         <junit-jupiter.version>5.13.0-M3</junit-jupiter.version>
-        <testcontainers.version>1.21.0</testcontainers.version>
+        <testcontainers.version>1.21.3</testcontainers.version>
         <datafaker.version>2.4.2</datafaker.version>
 
         <openapi-generator-maven-plugin.version>7.14.0</openapi-generator-maven-plugin.version>

@@ -2,8 +2,34 @@ profile: stand-alone
 
 spring:
   datasource:
-    url: jdbc:postgresql://postgres:5432/rest_mvc_boilerplate
-    username: rest_mvc_boilerplate_user
-    password: password
-  jpa:
-    show-sql: true
+    url: jdbc:postgresql://postgres:5432/bp_database
+    username: bpuser
+    password: bppassword
+  ssl:
+    bundle:
+      jks:
+        web:
+          key:
+            alias: "People Register Dev"
+            password: ""
+          keystore:
+            location: "classpath:application.p12"
+            password: "secret"
+            type: "PKCS12"
+        server:
+          key:
+            alias: "People Register Dev"
+            password: ""
+          keystore:
+            location: "classpath:application.p12"
+            password: "secret"
+            type: "PKCS12"
+          truststore:
+            location: "classpath:truststore.p12"
+            password: "secret"
+            type: "PKCS12"
+server:
+  port: 8443
+  ssl:
+    bundle: web
+
