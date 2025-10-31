@@ -1,0 +1,20 @@
+global:
+  query_log_file: query.log
+  scrape_failure_log_file: fail.log
+scrape_configs:
+  - job_name: prometheus
+    scheme: https
+    tls_config:
+#      ca_file: /prometheus/unsafe_root_ca.crt
+      insecure_skip_verify: true
+    metrics_path: /prometheus/metrics
+    static_configs:
+      - targets: ["localhost:9090"]
+  - job_name: bp-server
+    scheme: https
+    tls_config:
+#      ca_file: /prometheus/unsafe_root_ca.crt
+      insecure_skip_verify: true
+    metrics_path: /bp/actuator/prometheus
+    static_configs:
+      - targets: ["bp-service:8443"]

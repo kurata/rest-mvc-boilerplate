@@ -44,6 +44,9 @@
 
         <openapi-generator-maven-plugin.version>7.14.0</openapi-generator-maven-plugin.version>
 
+        <micrometer-tracing-bridge-otel.version>1.5.2</micrometer-tracing-bridge-otel.version>
+        <opentelemetry-exporter-otlp.version>1.51.0</opentelemetry-exporter-otlp.version>
+
         <maven-dependency-plugin.version>3.8.1</maven-dependency-plugin.version>
         <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
@@ -130,6 +133,17 @@
                 <artifactId>archunit-junit5</artifactId>
                 <version>${archunit.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>io.micrometer</groupId>
+                <artifactId>micrometer-tracing-bridge-otel</artifactId>
+                <version>${micrometer-tracing-bridge-otel.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentelemetry</groupId>
+                <artifactId>opentelemetry-exporter-otlp</artifactId>
+                <version>${opentelemetry-exporter-otlp.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
