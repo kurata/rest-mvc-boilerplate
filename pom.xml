@@ -10,8 +10,8 @@
 
     <name>Rest MVC Boilerplate - Project</name>
     <scm>
-        <url>https://github.com</url>
-        <connection>scm:git:https://github.com.git</connection>
+        <url>https://github.com/kurata/rest-mvc-boilerplate</url>
+        <connection>scm:git:https://github.com/kurata/rest-mvc-boilerplate.git</connection>
         <developerConnection>scm:git:git@github.com:kurata/rest-mvc-boilerplate.git</developerConnection>
     </scm>
 
