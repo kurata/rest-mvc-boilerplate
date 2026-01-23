@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>br.com.aqueteron</groupId>
     <artifactId>bp</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
 
     <name>Rest MVC Boilerplate - Project</name>
     <scm>
         <url>git@github.com:kurata/rest-mvc-boilerplate.git</url>
         <connection>scm:git:git@github.com:kurata/rest-mvc-boilerplate.git</connection>
         <developerConnection>scm:git:git@github.com:kurata/rest-mvc-boilerplate.git</developerConnection>
-    </scm>
+      <tag>bp-0.0.1</tag>
+  </scm>
 
     <modules>
         <module>bp-service</module>
