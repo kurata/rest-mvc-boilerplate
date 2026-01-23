@@ -5,12 +5,12 @@
     <groupId>br.com.aqueteron</groupId>
     <artifactId>bp</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.2</version>
+    <version>0.0.3-SNAPSHOT</version>
 
     <name>Rest MVC Boilerplate - Project</name>
     <scm>
         <developerConnection>scm:git:git@github.com:kurata/rest-mvc-boilerplate.git</developerConnection>
-        <tag>bp-0.0.2</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <modules>
